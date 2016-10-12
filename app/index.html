@@ -10,49 +10,76 @@
 </head>
 <body>
 
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="TodoCtrl as todoCtrl">
 
-            <table class="table table-bordered">
+            <table class="todo-table table table-bordered">
                 <thead>
                 <tr>
-                    <th class="text-center"> №</th>
-                    <th class="text-center" ng-click="type = 'status'; reverse = !reverse">Status
+                    <th class="todo-table__number text-center">
+                        <span>№</span>
+                    </th>
+                    <th class="todo-table__status text-center"
+                        ng-click="type = 'status'; reverse = !reverse">
+                        <span>Status</span>
                         <span class="sortorder" ng-if="type === 'status'" ng-class="{reverse: reverse}"></span>
                     </th>
 
-                    <th class="text-center"> Task</th>
-                    <th class="text-center" ng-click="type = 'deadline'; reverse = !reverse"> Deadline
+                    <th class="todo-table__task text-center">
+                        <span>Task</span>
+                    </th>
+                    <th class="todo-table__deadline text-center"
+                        ng-click="type = 'deadline'; reverse = !reverse">
+                        <span>Deadline</span>
                         <span class="sortorder" ng-if="type === 'deadline'" ng-class="{reverse: reverse}"></span>
                     </th>
-                    <th class="text-center"> Action</th>
+                    <th class="todo-table__action text-center">
+                        <span>Action</span>
+                    </th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr class="text-center"
                     ng-repeat="task in todoCtrl.list | orderBy:type:reverse"
-                    ng-class="{task_open: task.status}">
-                    <td> {{$index + 1}}</td>
-                    <td><input type="checkbox" ng-model="task.status"></td>
-                    <td class="text-left"> {{task.task}}</td>
-                    <td> {{task.deadline | date: "dd.MM.yyyy HH:mm:ss"}}</td>
+                    ng-class="{success: task.status}">
                     <td>
-                        <button class="btn-self" ng-click="todoCtrl.deleteTask($index)">Delete</button>
+                        <span>{{$index + 1}}</span>
+                    </td>
+                    <td>
+                        <input type="checkbox" ng-model="task.status">
+                    </td>
+                    <td class="text-left">
+                        <span>{{task.task}}</span>
+                    </td>
+                    <td>
+                        <span>{{task.deadline | date: "dd.MM.yyyy HH:mm:ss"}}</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" ng-click="todoCtrl.deleteTask($index)">
+                            <span>Delete</span>
+                        </button>
                     </td>
                 </tr>
                 <tr class="text-center">
                     <td></td>
                     <td></td>
-                    <td><textarea ng-model="todoCtrl.newTask"></textarea></td>
                     <td>
-                        <input ng-model="todoCtrl.deadline"
-                               type="datetime-local">
+                        <textarea
+                                ng-model="todoCtrl.newTask.title"
+                                class="todo-table__textarea form-control">
+                        </textarea>
                     </td>
-                    <td>
-                        <button class="btn-self" ng-click="todoCtrl.addTask()"> Add</button>
+                    <td class="vertical-align-middle">
+                        <input ng-model="todoCtrl.newTask.deadline"
+                               type="text">
+                    </td>
+                    <td class="vertical-align-middle">
+                        <button class="btn btn-primary btn-sm"
+                                ng-click="todoCtrl.addTask(todoCtrl.newTask)">
+                            <span>Add</span>
+                        </button>
                     </td>
                 </tr>
                 </tbody>
@@ -61,6 +88,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="libs/jquery/dist/jquery.min.js"></script>
 <script src="libs/angular/angular.min.js"></script>

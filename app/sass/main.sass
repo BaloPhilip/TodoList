@@ -1,45 +1,29 @@
 body
   font-family: Arial, sans-serif
 
-tr > td:nth-child(1)
+table
+  margin-top: 20px
+
+.todo-table__number
   width: 30px
 
-tr > td:nth-child(2)
+.todo-table__status
   width: 80px
 
-tr > th:nth-child(2), th:nth-child(4)
+.todo-table__status, .todo-table__deadline
   cursor: pointer
-  box-shadow: 3px 3px 10px -3px #000
-  &:hover
-    box-shadow: 1px 1px 10px -3px #000
 
-
-tr > td:nth-child(4)
+.todo-table__deadline
   width: 100px
 
-tr > td:nth-child(5)
+.todo-table__action
   width: 80px
 
-textarea
-  width: 100%
-  border-radius: 5px
-  border: 1px solid lightgrey
+.todo-table__textarea
+  resize: none
 
-input[type = datetime-local]
-  margin-top: 10px
-
-.btn-self
-  color: #fff
-  border: none
-  border-radius: 10px
-  background-color: #00aeef
-  margin-top: 5px
-  padding: 5px 15px
-  box-shadow: 0 5px 10px -4px #000
-  transition: all .2s
-  &:hover
-    box-shadow: 0 0 10px -4px #000
-    color: #fff
+.vertical-align-middle
+  vertical-align: middle!important
 
 .sortorder:after
   content: '\25b2'
@@ -47,6 +31,4 @@ input[type = datetime-local]
 .sortorder.reverse:after
   content: '\25bc'
 
-.task_open
-  background-color: lightgreen
 

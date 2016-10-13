@@ -54,7 +54,8 @@
                         <span>{{task.task}}</span>
                     </td>
                     <td>
-                        <span>{{task.deadline | date: "dd.MM.yyyy HH:mm:ss"}}</span>
+                        <span>{{task.deadline | date: "dd.MM.yyyy"}}</span>
+                        <!--<span>{{task.deadline | date: "dd.MM.yyyy HH:mm:ss"}}</span>-->
                     </td>
                     <td>
                         <button class="btn btn-danger btn-sm" ng-click="todoCtrl.deleteTask($index)">
@@ -64,7 +65,9 @@
                 </tr>
                 <tr class="text-center">
                     <td></td>
-                    <td></td>
+                    <td class="vertical-align-middle">
+                        <input type="checkbox" disabled="disabled">
+                    </td>
                     <td>
                         <textarea
                                 ng-model="todoCtrl.newTask.title"
@@ -72,8 +75,22 @@
                         </textarea>
                     </td>
                     <td class="vertical-align-middle">
-                        <input ng-model="todoCtrl.newTask.deadline"
-                               type="text">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <p class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           uib-datepicker-popup
+                                           ng-model="todoCtrl.newTask.dt"
+                                           is-open="todoCtrl.popup.opened"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="todoCtrl.open()">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
                     </td>
                     <td class="vertical-align-middle">
                         <button class="btn btn-primary btn-sm"
@@ -92,6 +109,7 @@
 
 <script src="libs/jquery/dist/jquery.min.js"></script>
 <script src="libs/angular/angular.min.js"></script>
+<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/todo-list/todoList.controller.js"></script>

@@ -14,7 +14,7 @@ table {
   cursor: pointer; }
 
 .todo-table__deadline {
-  width: 100px; }
+  width: 170px; }
 
 .todo-table__action {
   width: 80px; }

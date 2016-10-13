@@ -1,27 +1,43 @@
-function getTodaysDate() {
-    return (new Date()).getTime();
-}
-
 function todoCtrl() {
 
-    function _validateNewTask(_task) {
+    var vm = this;
 
+    // Проверка на заполнения поля "Task"
+    function _validateNewTask(_task) {
         if (_task.title !== '') {
             return true;
         }
-
         return false;
     }
-
-    var vm = this;
 
     // Массив для хранения списка задач задач
     vm.list = [];
 
+    vm.today = function () {
+        return new Date();
+    };
+
     vm.newTask = {
         status: false,
         title: '',
-        deadline: getTodaysDate()
+        dt: vm.today()
+    };
+
+    // Datepicker
+    vm.clear = function () {
+        vm.newTask.dt = null;
+    };
+
+    vm.open = function () {
+        vm.popup.opened = true;
+    };
+
+    vm.setDate = function (year, month, day) {
+        vm.newTask.dt = new Date(day, month, year);
+    };
+
+    vm.popup = {
+        opened: false
     };
 
     // Добавление новой задачи
@@ -34,14 +50,14 @@ function todoCtrl() {
             vm.list.push({
                 status: _task.status,
                 task: _task.title,
-                deadline: _task.deadline
+                deadline: _task.dt
             });
 
             // Отчистка полей
             vm.newTask = {
                 status: false,
                 title: '',
-                deadline: getTodaysDate()
+                dt: vm.today()
             };
 
         } else {
@@ -54,8 +70,7 @@ function todoCtrl() {
     vm.deleteTask = function (index) {
         // Удаляем текущую задачу используя ($index)
         vm.list.splice(index, 1);
-    }
-
+    };
 }
 
 angular.module('todoApp')

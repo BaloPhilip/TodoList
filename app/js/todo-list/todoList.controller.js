@@ -2,6 +2,11 @@ function todoCtrl() {
 
     var vm = this;
 
+    // Текущая дата и время
+    function _today () {
+        return new Date()
+    }
+
     // Проверка на заполнения поля "Task"
     function _validateNewTask(_task) {
         if (_task.title !== '') {
@@ -13,31 +18,10 @@ function todoCtrl() {
     // Массив для хранения списка задач задач
     vm.list = [];
 
-    vm.today = function () {
-        return new Date();
-    };
-
     vm.newTask = {
         status: false,
         title: '',
-        dt: vm.today()
-    };
-
-    // Datepicker
-    vm.clear = function () {
-        vm.newTask.dt = null;
-    };
-
-    vm.open = function () {
-        vm.popup.opened = true;
-    };
-
-    vm.setDate = function (year, month, day) {
-        vm.newTask.dt = new Date(day, month, year);
-    };
-
-    vm.popup = {
-        opened: false
+        data: {date: _today()}
     };
 
     // Добавление новой задачи
@@ -50,26 +34,25 @@ function todoCtrl() {
             vm.list.push({
                 status: _task.status,
                 task: _task.title,
-                deadline: _task.dt
+                deadline: _task.data.date
             });
 
             // Отчистка полей
             vm.newTask = {
                 status: false,
                 title: '',
-                dt: vm.today()
+                data: {date: _today()}
             };
 
         } else {
             // Если поля не заполнены показать предупреждение
-            alert('Необходимо заполнить все поля!')
+            alert('Необходимо добавить "Task"!')
         }
     };
 
     // Удаление выбранной задачи
-    vm.deleteTask = function (index) {
-        // Удаляем текущую задачу используя ($index)
-        vm.list.splice(index, 1);
+    vm.deleteTask = function (task) {
+        vm.list.splice(vm.list.indexOf(task),1);
     };
 }
 

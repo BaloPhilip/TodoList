@@ -13,9 +13,5 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-sass": "^2.3.2",
     "gulp-server-livereload": "^1.8.4"
-  },
-  "dependencies": {
-    "angular-bootstrap-datetimepicker": "^1.1.2",
-    "angular-date-time-input": "^1.2.1"
   }
 }

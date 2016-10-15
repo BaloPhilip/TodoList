@@ -3,7 +3,7 @@ function todoCtrl() {
     var vm = this;
 
     // Текущая дата и время
-    function _today () {
+    function _today() {
         return new Date()
     }
 
@@ -51,8 +51,8 @@ function todoCtrl() {
     };
 
     // Удаление выбранной задачи
-    vm.deleteTask = function (task) {
-        vm.list.splice(vm.list.indexOf(task),1);
+    vm.deleteTask = function (_task) {
+        vm.list.splice(vm.list.indexOf(_task), 1);
     };
 }
 
